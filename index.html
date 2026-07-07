@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Emmanuel Nate | Software Developer</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+    body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
+    .w3-row-padding img {margin-bottom: 12px}
+    html {scroll-behavior: smooth}
+    .top-navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: transparent;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
+    }
+    .top-navbar.scrolled {
+      background: rgba(0, 0, 0, 0.377);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    .top-navbar .w3-bar {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 16px;
+    }
+    .top-navbar .w3-bar-item {
+      position: relative;
+      width: auto;
+      border-radius: 6px;
+      letter-spacing: 1px;
+      background: transparent !important;
+    }
+    .top-navbar .w3-bar-item::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: 8px;
+      width: calc(100% - 48px);
+      height: 2px;
+      background: #ffffff;
+      transform: translateX(-50%) scaleX(0);
+      transform-origin: left;
+      transition: transform 0.25s ease;
+    }
+    .top-navbar .w3-bar-item:hover::after {
+      transform: translateX(-50%) scaleX(1);
+    }
+    #main {margin-left: 0}
+    .hero-section {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding-top: 92px !important;
+      padding-bottom: 92px !important;
+    }
+    .hero-section .w3-image {
+      max-height: 68vh;
+      object-fit: contain;
+    }
+    .scroll-cue {
+      position: absolute;
+      left: 50%;
+      bottom: 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: #7ee1ff;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-decoration: none;
+      transform: translateX(-50%);
+      opacity: 0.85;
+      transition: opacity 0.2s ease;
+    }
+    .scroll-cue:hover {
+      color: #7ee1ff;
+      opacity: 1;
+    }
+    .scroll-mouse {
+      position: relative;
+      width: 28px;
+      height: 44px;
+      border: 1px solid rgba(126, 225, 255, 0.75);
+      border-radius: 18px;
+      box-shadow: 0 0 16px rgba(95, 213, 255, 0.22);
+    }
+    .scroll-mouse::before {
+      content: "";
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      width: 4px;
+      height: 8px;
+      border-radius: 4px;
+      background: #7ee1ff;
+      transform: translateX(-50%);
+      animation: mouseWheel 2s ease-in-out infinite;
+    }
+    .scroll-arrow {
+      width: 10px;
+      height: 10px;
+      border-right: 1px solid #7ee1ff;
+      border-bottom: 1px solid #7ee1ff;
+      transform: rotate(45deg);
+      animation: scrollArrow 2s ease-in-out infinite;
+    }
+    @keyframes mouseWheel {
+      0% {opacity: 0; transform: translate(-50%, 0)}
+      35% {opacity: 1}
+      100% {opacity: 0; transform: translate(-50%, 16px)}
+    }
+    @keyframes scrollArrow {
+      0%, 100% {opacity: 0.25; transform: translateY(0) rotate(45deg)}
+      50% {opacity: 1; transform: translateY(6px) rotate(45deg)}
+    }
+    @media only screen and (max-width: 600px) {
+      .top-navbar .w3-bar {
+        gap: 0;
+        padding: 6px 4px;
+      }
+      .top-navbar .w3-bar-item {
+        flex: 1;
+        padding: 10px 0 !important;
+        font-size: 12px;
+      }
+      .hero-section {
+        padding-top: 76px !important;
+        padding-bottom: 84px !important;
+      }
+      .scroll-cue {
+        bottom: 18px;
+      }
+    }
+    </style>
+  </head>
+<body class="w3-black">
+
+<!-- Top Navigation -->
+<nav class="top-navbar w3-small w3-center" id="topNavbar">
+  <div class="w3-bar">
+    <a href="#" class="w3-bar-item w3-button w3-padding-large w3-hover-black">HOME</a>
+    <a href="#about" class="w3-bar-item w3-button w3-padding-large w3-hover-black">ABOUT</a>
+    <a href="#photos" class="w3-bar-item w3-button w3-padding-large w3-hover-black">PHOTOS</a>
+    <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hover-black">CONTACT</a>
+  </div>
+</nav>
+
+<!-- Page Content -->
+<div class="w3-padding-large" id="main">
+  <!-- Header/Home -->
+  <header class="hero-section w3-container w3-padding-32 w3-center w3-black" id="home">
+    <h1 class="w3-jumbo"><span class="w3-hide-small">Hello, I'm</span> Emmanuel Nate.</h1>
+    <p>Software Developer and Web Designer.</p>
+    
+    <a class="scroll-cue" href="#about" aria-label="Scroll to about section">
+      <span class="scroll-mouse"></span>
+      <span>SCROLL</span>
+      <span class="scroll-arrow"></span>
+    </a>
+  </header>
+
+  <!-- About Section -->
+  <div class="w3-content w3-justify w3-text-grey w3-padding-64" id="about">
+    <h2 class="w3-text-light-grey">My Name</h2>
+    <hr style="width:200px" class="w3-opacity">
+    <p>I am a software developer with a passion for creating innovative solutions. With experience in web design and development, I strive to build applications that are both functional and visually appealing. My skills include photography, web design, and proficiency in tools like Photoshop. I am dedicated to continuous learning and staying updated with the latest technologies to deliver high-quality work.
+    </p>
+    <h3 class="w3-padding-16 w3-text-light-grey">My Skills</h3>
+    <p class="w3-wide">C#</p>
+    <div class="w3-white">
+      <div class="w3-dark-grey" style="height:28px;width:80%"></div>
+    </div>
+    <p class="w3-wide">Java</p>
+    <div class="w3-white">
+      <div class="w3-dark-grey" style="height:28px;width:75%"></div>
+    </div>
+    <p class="w3-wide">PHP</p>
+    <div class="w3-white">
+      <div class="w3-dark-grey" style="height:28px;width:45%"></div>
+    </div>
+    <p class="w3-wide">JavaScript</p>
+    <div class="w3-white">
+      <div class="w3-dark-grey" style="height:28px;width:40%"></div>
+    </div><br>
+    
+    <div class="w3-row w3-center w3-padding-16 w3-section w3-light-grey">
+      <div class="w3-quarter w3-section">
+        <span class="w3-xlarge">8</span><br>
+        Projects Done
+      </div>
+      <div class="w3-quarter w3-section">
+        <span class="w3-xlarge">3</span><br>
+        Clients
+      </div>
+      <div class="w3-quarter w3-section">
+        <span class="w3-xlarge">3</span><br>
+        Meetings
+      </div>
+    </div>
+
+    <button class="w3-button w3-light-grey w3-padding-large w3-section">
+      <i class="fa fa-download"></i> Download Resume
+    </button>
+    
+    <!-- Grid for pricing tables -->
+    <h3 class="w3-padding-16 w3-text-light-grey">My Price</h3>
+    <div class="w3-row-padding" style="margin:0 -16px">
+      <div class="w3-half w3-margin-bottom">
+        <ul class="w3-ul w3-white w3-center w3-opacity w3-hover-opacity-off">
+          <li class="w3-dark-grey w3-xlarge w3-padding-32">Basic</li>
+          <li class="w3-padding-16">Web Design</li>
+          <li class="w3-padding-16">Photography</li>
+          <li class="w3-padding-16">5GB Storage</li>
+          <li class="w3-padding-16">Mail Support</li>
+          <li class="w3-padding-16">
+            <h2>$ 10</h2>
+            <span class="w3-opacity">per month</span>
+          </li>
+          <li class="w3-light-grey w3-padding-24">
+            <button class="w3-button w3-white w3-padding-large w3-hover-black">Sign Up</button>
+          </li>
+        </ul>
+      </div>
+
+      <div class="w3-half">
+        <ul class="w3-ul w3-white w3-center w3-opacity w3-hover-opacity-off">
+          <li class="w3-dark-grey w3-xlarge w3-padding-32">Pro</li>
+          <li class="w3-padding-16">Web Design</li>
+          <li class="w3-padding-16">Photography</li>
+          <li class="w3-padding-16">50GB Storage</li>
+          <li class="w3-padding-16">Endless Support</li>
+          <li class="w3-padding-16">
+            <h2>$ 25</h2>
+            <span class="w3-opacity">per month</span>
+          </li>
+          <li class="w3-light-grey w3-padding-24">
+            <button class="w3-button w3-white w3-padding-large w3-hover-black">Sign Up</button>
+          </li>
+        </ul>
+      </div>
+    <!-- End Grid/Pricing tables -->
+    </div>
+    
+    <!-- Testimonials -->
+    <h3 class="w3-padding-24 w3-text-light-grey">My Reputation</h3>  
+    <img src="https://www.w3schools.com/w3images/bandmember.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:80px">
+    <p><span class="w3-large w3-margin-right">Chris Fox.</span> CEO at Mighty Schools.</p>
+    <p>John Doe saved us from a web disaster.</p><br>
+    
+    <img src="https://www.w3schools.com/w3images/avatar_g2.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:80px">
+    <p><span class="w3-large w3-margin-right">Rebecca Flex.</span> CEO at Company.</p>
+    <p>No one is better than John Doe.</p>
+  <!-- End About Section -->
+  </div>
+  
+  <!-- Portfolio Section -->
+  <div class="w3-padding-64 w3-content" id="photos">
+    <h2 class="w3-text-light-grey">My Photos</h2>
+    <hr style="width:200px" class="w3-opacity">
+
+    <!-- Grid for photos -->
+    <div class="w3-row-padding" style="margin:0 -16px">
+      <div class="w3-half">
+        <img src="https://www.w3schools.com/w3images/wedding.jpg" style="width:100%">
+        <img src="https://www.w3schools.com/w3images/rocks.jpg" style="width:100%">
+        <img src="https://www.w3schools.com/w3images/sailboat.jpg" style="width:100%">
+      </div>
+
+      <div class="w3-half">
+        <img src="https://www.w3schools.com/w3images/underwater.jpg" style="width:100%">
+        <img src="https://www.w3schools.com/w3images/chef.jpg" style="width:100%">
+        <img src="https://www.w3schools.com/w3images/wedding.jpg" style="width:100%">
+        <img src="https://www.w3schools.com/w3images/p6.jpg" style="width:100%">
+      </div>
+    <!-- End photo grid -->
+    </div>
+  <!-- End Portfolio Section -->
+  </div>
+
+  <!-- Contact Section -->
+  <div class="w3-padding-64 w3-content w3-text-grey" id="contact">
+    <h2 class="w3-text-light-grey">Contact Me</h2>
+    <hr style="width:200px" class="w3-opacity">
+
+    <div class="w3-section">
+      <p><i class="fa fa-map-marker fa-fw w3-text-white w3-xxlarge w3-margin-right"></i> Manila, Philippines</p>
+      <p><i class="fa fa-phone fa-fw w3-text-white w3-xxlarge w3-margin-right"></i> Phone: +63 977 382 5442</p>
+      <p><i class="fa fa-envelope fa-fw w3-text-white w3-xxlarge w3-margin-right"> </i> Email: emmannate283@gmail.com</p>
+    </div><br>
+    <p>Let's get in touch. Send me a message:</p>
+
+    <form id="contactForm">
+      <p><input class="w3-input w3-padding-16" type="text" placeholder="Name" required name="name"></p>
+      <p><input class="w3-input w3-padding-16" type="email" placeholder="Email" required name="email"></p>
+      <p><input class="w3-input w3-padding-16" type="text" placeholder="Subject" required name="title"></p>
+      <p><input class="w3-input w3-padding-16" type="text" placeholder="Message" required name="message"></p>
+      <p>
+        <button class="w3-button w3-light-grey w3-padding-large" type="submit" id="contactSubmit">
+          <i class="fa fa-paper-plane"></i> SEND MESSAGE
+        </button>
+      </p>
+      <p id="contactStatus" class="w3-small"></p>
+    </form>
+  <!-- End Contact Section -->
+  </div>
+  
+<!-- Footer. This section contains an ad for W3Schools Spaces. You can leave it to support us. -->
+<footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge">
+  <a class="fa fa-facebook-official w3-hover-opacity" href="https://www.facebook.com/" target="_blank"></a>
+  <a class="fa fa-github w3-hover-opacity" href="https://www.github.com/" target="_blank"></a>
+  <a class="fa fa-linkedin w3-hover-opacity" href="https://www.linkedin.com/company/" target="_blank"></a>
+  
+ <p class="w3-small">@2023 Emmanuel Nate. All rights reserved.</p>
+ <a class="w3-button w3-round-xxlarge w3-small w3-light-grey" href="https://www.w3schools.com/spaces" target="_blank">Start now</a> 
+ <!-- End footer -->
+</footer>
+
+<!-- END PAGE CONTENT -->
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  const topNavbar = document.getElementById('topNavbar');
+  const contactForm = document.getElementById('contactForm');
+  const contactSubmit = document.getElementById('contactSubmit');
+  const contactStatus = document.getElementById('contactStatus');
+  const emailjsPublicKey = 'c67RPpAb6n1Fufvld';
+  const emailjsServiceId = 'service_kbeac7r';
+  const emailjsTemplateId = 'template_r2eu6os';
+
+  function updateNavbarGlass() {
+    topNavbar.classList.toggle('scrolled', window.scrollY > 20);
+  }
+
+  function emailjsIsConfigured() {
+    return ![emailjsPublicKey, emailjsServiceId, emailjsTemplateId].some(value => value.startsWith('YOUR_'));
+  }
+
+  if (window.emailjs && emailjsIsConfigured()) {
+    emailjs.init({
+      publicKey: emailjsPublicKey,
+      limitRate: {
+        id: 'contact-form',
+        throttle: 30000,
+        },
+    });
+  }
+
+  contactForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    if (!emailjsIsConfigured()) {
+      contactStatus.textContent = 'Add your EmailJS Public Key, Service ID, and Template ID first.';
+      contactStatus.className = 'w3-small w3-text-orange';
+      return;
+    }
+
+    if (!window.emailjs) {
+      contactStatus.textContent = 'EmailJS could not load. Check your internet connection and try again.';
+      contactStatus.className = 'w3-small w3-text-red';
+      return;
+    }
+
+    contactSubmit.disabled = true;
+    contactSubmit.textContent = 'SENDING...';
+    contactStatus.textContent = '';
+
+    emailjs.sendForm(emailjsServiceId, emailjsTemplateId, contactForm)
+      .then(() => {
+        contactStatus.textContent = 'Message sent successfully.';
+        contactStatus.className = 'w3-small w3-text-green';
+        contactForm.reset();
+      })
+      .catch(() => {
+        contactStatus.textContent = 'Message failed to send. Please try again.';
+        contactStatus.className = 'w3-small w3-text-red';
+      })
+      .finally(() => {
+        contactSubmit.disabled = false;
+        contactSubmit.innerHTML = '<i class="fa fa-paper-plane"></i> SEND MESSAGE';
+      });
+  });
+
+  updateNavbarGlass();
+  window.addEventListener('scroll', updateNavbarGlass);
+</script>
+
+</body>
+</html>
