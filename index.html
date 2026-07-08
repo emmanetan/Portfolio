@@ -25,7 +25,7 @@
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.055);
     }
     .top-navbar .w3-bar {
       display: flex;
@@ -118,6 +118,42 @@
       transform: rotate(45deg);
       animation: scrollArrow 2s ease-in-out infinite;
     }
+    .scroll-to-top {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 1001;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      border: 1px solid rgba(126, 225, 255, 0.5);
+      border-radius: 50%;
+      color: #ffffff;
+      background: rgba(0, 0, 0, 0.72);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(12px);
+      transition: opacity 0.25s ease, transform 0.25s ease, background-color 0.2s ease;
+    }
+    .scroll-to-top.visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+    .scroll-to-top:hover,
+    .scroll-to-top:focus {
+      color: #000000;
+      background: #7ee1ff;
+      outline: none;
+    }
+    .scroll-to-top svg {
+      width: 22px;
+      height: 22px;
+      fill: currentColor;
+    }
     @keyframes mouseWheel {
       0% {opacity: 0; transform: translate(-50%, 0)}
       35% {opacity: 1}
@@ -143,6 +179,12 @@
       }
       .scroll-cue {
         bottom: 18px;
+      }
+      .scroll-to-top {
+        right: 16px;
+        bottom: 16px;
+        width: 44px;
+        height: 44px;
       }
     }
     </style>
@@ -216,44 +258,7 @@
       <i class="fa fa-download"></i> Download Resume
     </button>
     
-    <!-- Grid for pricing tables -->
-    <h3 class="w3-padding-16 w3-text-light-grey">My Price</h3>
-    <div class="w3-row-padding" style="margin:0 -16px">
-      <div class="w3-half w3-margin-bottom">
-        <ul class="w3-ul w3-white w3-center w3-opacity w3-hover-opacity-off">
-          <li class="w3-dark-grey w3-xlarge w3-padding-32">Basic</li>
-          <li class="w3-padding-16">Web Design</li>
-          <li class="w3-padding-16">Photography</li>
-          <li class="w3-padding-16">5GB Storage</li>
-          <li class="w3-padding-16">Mail Support</li>
-          <li class="w3-padding-16">
-            <h2>$ 10</h2>
-            <span class="w3-opacity">per month</span>
-          </li>
-          <li class="w3-light-grey w3-padding-24">
-            <button class="w3-button w3-white w3-padding-large w3-hover-black">Sign Up</button>
-          </li>
-        </ul>
-      </div>
-
-      <div class="w3-half">
-        <ul class="w3-ul w3-white w3-center w3-opacity w3-hover-opacity-off">
-          <li class="w3-dark-grey w3-xlarge w3-padding-32">Pro</li>
-          <li class="w3-padding-16">Web Design</li>
-          <li class="w3-padding-16">Photography</li>
-          <li class="w3-padding-16">50GB Storage</li>
-          <li class="w3-padding-16">Endless Support</li>
-          <li class="w3-padding-16">
-            <h2>$ 25</h2>
-            <span class="w3-opacity">per month</span>
-          </li>
-          <li class="w3-light-grey w3-padding-24">
-            <button class="w3-button w3-white w3-padding-large w3-hover-black">Sign Up</button>
-          </li>
-        </ul>
-      </div>
-    <!-- End Grid/Pricing tables -->
-    </div>
+    
     
     <!-- Testimonials -->
     <h3 class="w3-padding-24 w3-text-light-grey">My Reputation</h3>  
@@ -294,7 +299,7 @@
   <!-- Contact Section -->
   <div class="w3-padding-64 w3-content w3-text-grey" id="contact">
     <h2 class="w3-text-light-grey">Contact Me</h2>
-    <hr style="width:200px" class="w3-opacity">
+    <hr style="width:175px" class="w3-opacity">
 
     <div class="w3-section">
       <p><i class="fa fa-map-marker fa-fw w3-text-white w3-xxlarge w3-margin-right"></i> Manila, Philippines</p>
@@ -325,16 +330,23 @@
   <a class="fa fa-linkedin w3-hover-opacity" href="https://www.linkedin.com/company/" target="_blank"></a>
   
  <p class="w3-small">@2023 Emmanuel Nate. All rights reserved.</p>
- <a class="w3-button w3-round-xxlarge w3-small w3-light-grey" href="https://www.w3schools.com/spaces" target="_blank">Start now</a> 
+ 
  <!-- End footer -->
 </footer>
 
 <!-- END PAGE CONTENT -->
 </div>
 
+<button class="scroll-to-top" id="scrollToTop" type="button" aria-label="Scroll to top">
+  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+    <path d="M12 4 4.7 11.3l1.4 1.4L11 7.8V20h2V7.8l4.9 4.9 1.4-1.4L12 4z"></path>
+  </svg>
+</button>
+
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
   const topNavbar = document.getElementById('topNavbar');
+  const scrollToTop = document.getElementById('scrollToTop');
   const contactForm = document.getElementById('contactForm');
   const contactSubmit = document.getElementById('contactSubmit');
   const contactStatus = document.getElementById('contactStatus');
@@ -344,6 +356,7 @@
 
   function updateNavbarGlass() {
     topNavbar.classList.toggle('scrolled', window.scrollY > 20);
+    scrollToTop.classList.toggle('visible', window.scrollY > 300);
   }
 
   function emailjsIsConfigured() {
@@ -397,6 +410,12 @@
 
   updateNavbarGlass();
   window.addEventListener('scroll', updateNavbarGlass);
+  scrollToTop.addEventListener('click', function() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  });
 </script>
 
 </body>
