@@ -154,6 +154,84 @@
       height: 22px;
       fill: currentColor;
     }
+    .contact-notification {
+      display: none;
+      align-items: flex-start;
+      gap: 14px;
+      margin-top: 18px;
+      padding: 16px 18px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-left-width: 4px;
+      border-radius: 8px;
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.28);
+    }
+    .contact-notification.show {
+      display: flex;
+      animation: notificationIn 0.25s ease;
+    }
+    .contact-notification.warning {
+      border-left-color: #ffcc66;
+      background: rgba(255, 193, 7, 0.13);
+    }
+    .contact-notification.error {
+      border-left-color: #ff6b6b;
+      background: rgba(255, 80, 80, 0.13);
+    }
+    .contact-notification.success {
+      border-left-color: #7ee1ff;
+      background: rgba(126, 225, 255, 0.12);
+    }
+    .contact-notification-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 34px;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.32);
+    }
+    .contact-notification-icon svg {
+      width: 19px;
+      height: 19px;
+      fill: currentColor;
+    }
+    .contact-notification-content {
+      flex: 1;
+      min-width: 0;
+    }
+    .contact-notification-title {
+      margin: 0 0 4px;
+      color: #ffffff;
+      font-weight: 700;
+    }
+    .contact-notification-message {
+      margin: 0;
+      color: #d6d6d6;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .contact-notification-close {
+      flex: 0 0 auto;
+      border: 0;
+      color: #ffffff;
+      background: transparent;
+      font-size: 22px;
+      line-height: 1;
+      cursor: pointer;
+      opacity: 0.75;
+    }
+    .contact-notification-close:hover,
+    .contact-notification-close:focus {
+      opacity: 1;
+      outline: none;
+    }
+    @keyframes notificationIn {
+      from {opacity: 0; transform: translateY(8px)}
+      to {opacity: 1; transform: translateY(0)}
+    }
     @keyframes mouseWheel {
       0% {opacity: 0; transform: translate(-50%, 0)}
       35% {opacity: 1}
@@ -196,7 +274,7 @@
   <div class="w3-bar">
     <a href="#" class="w3-bar-item w3-button w3-padding-large w3-hover-black">HOME</a>
     <a href="#about" class="w3-bar-item w3-button w3-padding-large w3-hover-black">ABOUT</a>
-    <a href="#photos" class="w3-bar-item w3-button w3-padding-large w3-hover-black">PHOTOS</a>
+    <a href="#projects" class="w3-bar-item w3-button w3-padding-large w3-hover-black">PROJECTS</a>
     <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hover-black">CONTACT</a>
   </div>
 </nav>
@@ -273,23 +351,20 @@
   </div>
   
   <!-- Portfolio Section -->
-  <div class="w3-padding-64 w3-content" id="photos">
-    <h2 class="w3-text-light-grey">My Photos</h2>
-    <hr style="width:200px" class="w3-opacity">
+  <div class="w3-padding-64 w3-content" id="projects">
+    <h2 class="w3-text-light-grey">Projects</h2>
+    <hr style="width:120px" class="w3-opacity">
 
-    <!-- Grid for photos -->
+    <!-- Grid for projects -->
     <div class="w3-row-padding" style="margin:0 -16px">
+      <p style="color: #ccc; text-align: center;">Can't show projects yet. Coming soon...</p>
       <div class="w3-half">
-        <img src="https://www.w3schools.com/w3images/wedding.jpg" style="width:100%">
-        <img src="https://www.w3schools.com/w3images/rocks.jpg" style="width:100%">
-        <img src="https://www.w3schools.com/w3images/sailboat.jpg" style="width:100%">
+        
+        
       </div>
 
       <div class="w3-half">
-        <img src="https://www.w3schools.com/w3images/underwater.jpg" style="width:100%">
-        <img src="https://www.w3schools.com/w3images/chef.jpg" style="width:100%">
-        <img src="https://www.w3schools.com/w3images/wedding.jpg" style="width:100%">
-        <img src="https://www.w3schools.com/w3images/p6.jpg" style="width:100%">
+        
       </div>
     <!-- End photo grid -->
     </div>
@@ -306,7 +381,7 @@
       <p><i class="fa fa-phone fa-fw w3-text-white w3-xxlarge w3-margin-right"></i> Phone: +63 977 382 5442</p>
       <p><i class="fa fa-envelope fa-fw w3-text-white w3-xxlarge w3-margin-right"> </i> Email: emmannate283@gmail.com</p>
     </div><br>
-    <p>Let's get in touch. Send me a message:</p>
+    <p style="color: #ffffff;">Let's get in touch. Send me a message:</p>
 
     <form id="contactForm">
       <p><input class="w3-input w3-padding-16" type="text" placeholder="Name" required name="name"></p>
@@ -318,7 +393,14 @@
           <i class="fa fa-paper-plane"></i> SEND MESSAGE
         </button>
       </p>
-      <p id="contactStatus" class="w3-small"></p>
+      <div class="contact-notification" id="contactStatus" role="status" aria-live="polite">
+        <span class="contact-notification-icon" id="contactStatusIcon" aria-hidden="true"></span>
+        <div class="contact-notification-content">
+          <p class="contact-notification-title" id="contactStatusTitle"></p>
+          <p class="contact-notification-message" id="contactStatusMessage"></p>
+        </div>
+        <button class="contact-notification-close" id="contactStatusClose" type="button" aria-label="Dismiss notification">&times;</button>
+      </div>
     </form>
   <!-- End Contact Section -->
   </div>
@@ -329,7 +411,7 @@
   <a class="fa fa-github w3-hover-opacity" href="https://www.github.com/" target="_blank"></a>
   <a class="fa fa-linkedin w3-hover-opacity" href="https://www.linkedin.com/company/" target="_blank"></a>
   
- <p class="w3-small">@2023 Emmanuel Nate. All rights reserved.</p>
+ <p class="w3-small">@2026 Emmanuel Nate. All rights reserved.</p>
  
  <!-- End footer -->
 </footer>
@@ -350,9 +432,18 @@
   const contactForm = document.getElementById('contactForm');
   const contactSubmit = document.getElementById('contactSubmit');
   const contactStatus = document.getElementById('contactStatus');
+  const contactStatusIcon = document.getElementById('contactStatusIcon');
+  const contactStatusTitle = document.getElementById('contactStatusTitle');
+  const contactStatusMessage = document.getElementById('contactStatusMessage');
+  const contactStatusClose = document.getElementById('contactStatusClose');
   const emailjsPublicKey = 'c67RPpAb6n1Fufvld';
   const emailjsServiceId = 'service_kbeac7r';
   const emailjsTemplateId = 'template_r2eu6os';
+  const notificationIcons = {
+    warning: '<svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"></path></svg>',
+    error: '<svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 .01 0H12zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"></path></svg>',
+    success: '<svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"></path></svg>',
+  };
 
   function updateNavbarGlass() {
     topNavbar.classList.toggle('scrolled', window.scrollY > 20);
@@ -361,6 +452,20 @@
 
   function emailjsIsConfigured() {
     return ![emailjsPublicKey, emailjsServiceId, emailjsTemplateId].some(value => value.startsWith('YOUR_'));
+  }
+
+  function showContactNotification(type, title, message) {
+    contactStatus.className = `contact-notification show ${type}`;
+    contactStatusIcon.innerHTML = notificationIcons[type] || notificationIcons.error;
+    contactStatusTitle.textContent = title;
+    contactStatusMessage.textContent = message;
+  }
+
+  function hideContactNotification() {
+    contactStatus.className = 'contact-notification';
+    contactStatusIcon.innerHTML = '';
+    contactStatusTitle.textContent = '';
+    contactStatusMessage.textContent = '';
   }
 
   if (window.emailjs && emailjsIsConfigured()) {
@@ -377,30 +482,42 @@
     event.preventDefault();
 
     if (!emailjsIsConfigured()) {
-      contactStatus.textContent = 'Add your EmailJS Public Key, Service ID, and Template ID first.';
-      contactStatus.className = 'w3-small w3-text-orange';
+      showContactNotification(
+        'warning',
+        'Email service is not ready',
+        'Add your EmailJS Public Key, Service ID, and Template ID before sending messages.'
+      );
       return;
     }
 
     if (!window.emailjs) {
-      contactStatus.textContent = 'EmailJS could not load. Check your internet connection and try again.';
-      contactStatus.className = 'w3-small w3-text-red';
+      showContactNotification(
+        'error',
+        'Message service could not load',
+        'Check your internet connection, refresh the page, and try sending your message again.'
+      );
       return;
     }
 
     contactSubmit.disabled = true;
     contactSubmit.textContent = 'SENDING...';
-    contactStatus.textContent = '';
+    hideContactNotification();
 
     emailjs.sendForm(emailjsServiceId, emailjsTemplateId, contactForm)
       .then(() => {
-        contactStatus.textContent = 'Message sent successfully.';
-        contactStatus.className = 'w3-small w3-text-green';
+        showContactNotification(
+          'success',
+          'Message sent',
+          'Thanks for reaching out. I will get back to you soon.'
+        );
         contactForm.reset();
       })
       .catch(() => {
-        contactStatus.textContent = 'Message failed to send. Please try again.';
-        contactStatus.className = 'w3-small w3-text-red';
+        showContactNotification(
+          'error',
+          'Message failed to send',
+          'Something went wrong while sending your message. Please try again in a moment.'
+        );
       })
       .finally(() => {
         contactSubmit.disabled = false;
@@ -410,6 +527,7 @@
 
   updateNavbarGlass();
   window.addEventListener('scroll', updateNavbarGlass);
+  contactStatusClose.addEventListener('click', hideContactNotification);
   scrollToTop.addEventListener('click', function() {
     window.scrollTo({
       top: 0,
