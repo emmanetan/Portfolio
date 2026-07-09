@@ -55,6 +55,10 @@
     .top-navbar .w3-bar-item:hover::after {
       transform: translateX(-50%) scaleX(1);
     }
+
+    textarea {
+      resize: vertical;
+    }
     #main {margin-left: 0}
     .hero-section {
       position: relative;
@@ -301,20 +305,20 @@
     </p>
     <h3 class="w3-padding-16 w3-text-light-grey">My Skills</h3>
     <p class="w3-wide">C#</p>
-    <div class="w3-white">
-      <div class="w3-dark-grey" style="height:28px;width:80%"></div>
+    <div class="w3-white" style="border-radius: 20px;">
+      <div class="w3-light-blue" style="height:5px;width:80%; border-radius: 20px;"></div>
     </div>
     <p class="w3-wide">Java</p>
-    <div class="w3-white">
-      <div class="w3-dark-grey" style="height:28px;width:75%"></div>
+    <div class="w3-white" style="border-radius: 20px;">
+      <div class="w3-light-blue" style="height:5px;width:75%; border-radius: 20px;"></div>
     </div>
     <p class="w3-wide">PHP</p>
-    <div class="w3-white">
-      <div class="w3-dark-grey" style="height:28px;width:45%"></div>
+    <div class="w3-white" style="border-radius: 20px;">
+      <div class="w3-light-blue" style="height:5px;width:45%; border-radius: 20px;"></div>
     </div>
     <p class="w3-wide">JavaScript</p>
-    <div class="w3-white">
-      <div class="w3-dark-grey" style="height:28px;width:40%"></div>
+    <div class="w3-white" style="border-radius: 20px;">
+      <div class="w3-light-blue" style="height:5px;width:40%; border-radius: 20px;"  ></div>
     </div><br>
     
     <div class="w3-row w3-center w3-padding-16 w3-section w3-light-grey">
@@ -336,17 +340,6 @@
       <i class="fa fa-download"></i> Download Resume
     </button>
     
-    
-    
-    <!-- Testimonials -->
-    <h3 class="w3-padding-24 w3-text-light-grey">My Reputation</h3>  
-    <img src="https://www.w3schools.com/w3images/bandmember.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:80px">
-    <p><span class="w3-large w3-margin-right">Chris Fox.</span> CEO at Mighty Schools.</p>
-    <p>John Doe saved us from a web disaster.</p><br>
-    
-    <img src="https://www.w3schools.com/w3images/avatar_g2.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:80px">
-    <p><span class="w3-large w3-margin-right">Rebecca Flex.</span> CEO at Company.</p>
-    <p>No one is better than John Doe.</p>
   <!-- End About Section -->
   </div>
   
@@ -358,6 +351,7 @@
     <!-- Grid for projects -->
     <div class="w3-row-padding" style="margin:0 -16px">
       <p style="color: #ccc; text-align: center;">Can't show projects yet. Coming soon...</p>
+      
       <div class="w3-half">
         
         
@@ -387,7 +381,14 @@
       <p><input class="w3-input w3-padding-16" type="text" placeholder="Name" required name="name"></p>
       <p><input class="w3-input w3-padding-16" type="email" placeholder="Email" required name="email"></p>
       <p><input class="w3-input w3-padding-16" type="text" placeholder="Subject" required name="title"></p>
-      <p><input class="w3-input w3-padding-16" type="text" placeholder="Message" required name="message"></p>
+      <p><textarea
+          class="w3-input w3-padding-16"
+          placeholder="Message"
+          required
+          name="message"
+          rows="5"
+          maxlength="500"
+          ></textarea></p>
       <p>
         <button class="w3-button w3-light-grey w3-padding-large" type="submit" id="contactSubmit">
           <i class="fa fa-paper-plane"></i> SEND MESSAGE
