@@ -132,7 +132,8 @@ window.portfolioProjects = [
     if (project.image) {
       const image = createElement('img', 'project-image');
       image.alt = `${project.title} screenshot`;
-      image.loading = 'lazy';
+      // Hidden lazy-loaded images can wait forever for a visible layout box.
+      image.loading = 'eager';
       image.decoding = 'async';
       image.hidden = true;
       image.addEventListener('load', () => {
