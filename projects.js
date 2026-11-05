@@ -1,6 +1,6 @@
-// Add screenshots to your portfolio folder, then set image to their relative path,
+// Add screenshots to images/projects, then set image to their relative path,
 // for example: image: 'images/projects/pos.png'. Leave it empty until ready.
-// Replace the two example.com URLs with the actual project URLs.
+// Set url to the actual project URL when a website is available.
 // Projects with an empty url open their screenshot in project-preview.html.
 window.portfolioProjects = [
   {
@@ -60,7 +60,7 @@ window.portfolioProjects = [
     title: 'DormHub',
     category: 'Dormitory management',
     description: 'A dormitory management system built with Laravel, Tailwind CSS, and Bootstrap.',
-    image: '',
+    image: 'images/projects/DormHub.jpg',
     url: '',
     stack: [
       ['Language', ['PHP']],
@@ -90,7 +90,7 @@ window.portfolioProjects = [
     title: 'Pitaka',
     category: 'Personal budget tracking',
     description: 'A personal finance management application designed to help users track income, monitor expenses, manage budgets, and visualize financial activity through interactive charts and reports.',
-    image: '',
+    image: 'images/projects/Pitaka.png',
     url: 'https://pitaka-six.vercel.app/',
     stack: [
       ['Framework', ['Next.js', 'React']],
