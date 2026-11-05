@@ -74,7 +74,7 @@ window.portfolioProjects = [
     title: 'Web-Based Barangay Management System',
     category: 'Document digitization & data entry',
     description: 'A web-based barangay management system with OCR-based document digitization and automated data entry.',
-    image: '',
+    image: 'images/projects/BarangayManagementSystem.png',
     url: 'https://barangaysagpon.page/',
     stack: [
       ['Language', ['PHP']],
@@ -132,10 +132,10 @@ window.portfolioProjects = [
     if (project.image) {
       const image = createElement('img', 'project-image');
       image.alt = `${project.title} screenshot`;
-      // Hidden lazy-loaded images can wait forever for a visible layout box.
+      // Render configured screenshots directly; do not hide them while loading.
       image.loading = 'eager';
       image.decoding = 'async';
-      image.hidden = true;
+      placeholder.hidden = true;
       image.addEventListener('load', () => {
         image.hidden = false;
         placeholder.hidden = true;
@@ -143,9 +143,16 @@ window.portfolioProjects = [
       image.addEventListener('error', () => {
         image.hidden = true;
         placeholder.hidden = false;
+        placeholder.lastElementChild.textContent = 'Screenshot unavailable';
       });
-      image.src = project.image;
       visual.appendChild(image);
+      image.src = project.image;
+
+      // Also handle screenshots already available from the browser cache.
+      if (image.complete && image.naturalWidth > 0) {
+        image.hidden = false;
+        placeholder.hidden = true;
+      }
     }
 
     const body = createElement('div', 'project-body');
