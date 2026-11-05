@@ -75,7 +75,7 @@ window.portfolioProjects = [
     category: 'Document digitization & data entry',
     description: 'A web-based barangay management system with OCR-based document digitization and automated data entry.',
     image: '',
-    url: 'https://example.com/barangay-management',
+    url: 'https://barangaysagpon.page/',
     stack: [
       ['Language', ['PHP']],
       ['Framework', ['Laravel']],
@@ -91,7 +91,7 @@ window.portfolioProjects = [
     category: 'Personal budget tracking',
     description: 'A personal finance management application designed to help users track income, monitor expenses, manage budgets, and visualize financial activity through interactive charts and reports.',
     image: '',
-    url: 'https://example.com/pitaka',
+    url: 'https://pitaka-six.vercel.app/',
     stack: [
       ['Framework', ['Next.js', 'React']],
       ['Language', ['TypeScript']],
