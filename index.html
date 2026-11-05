@@ -11,6 +11,24 @@
     body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
     .w3-row-padding img {margin-bottom: 12px}
     html {scroll-behavior: smooth}
+    .scroll-reveal {
+      opacity: var(--reveal-opacity, 1);
+      transform: none;
+      transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+      transition-delay: var(--reveal-delay, 0ms);
+    }
+    .scroll-reveal.w3-opacity {
+      --reveal-opacity: 0.6;
+    }
+    .scroll-reveal.reveal-pending {
+      opacity: 0;
+      transform: translateY(28px);
+    }
+    .scroll-reveal:focus-within {
+      opacity: var(--reveal-opacity, 1);
+      transform: none;
+      transition: none;
+    }
     .top-navbar {
       position: fixed;
       top: 0;
@@ -346,6 +364,19 @@
       0%, 100% {opacity: 0.25; transform: translateY(0) rotate(45deg)}
       50% {opacity: 1; transform: translateY(6px) rotate(45deg)}
     }
+    @media (prefers-reduced-motion: reduce) {
+      html {scroll-behavior: auto}
+      .scroll-reveal,
+      .scroll-reveal.reveal-pending {
+        opacity: var(--reveal-opacity, 1);
+        transform: none;
+        transition: none;
+      }
+      .scroll-mouse::before,
+      .scroll-arrow {
+        animation: none;
+      }
+    }
     @media only screen and (max-width: 600px) {
       .top-navbar .w3-bar {
         gap: 0;
@@ -391,8 +422,8 @@
 <div class="w3-padding-large" id="main">
   <!-- Header/Home -->
   <header class="hero-section w3-container w3-padding-32 w3-center w3-black" id="home">
-    <h1 class="w3-jumbo"><span class="w3-hide-small">Hello, I'm</span> Emmanuel Nate.</h1>
-    <p>Software Developer and Web Designer.</p>
+    <h1 class="w3-jumbo scroll-reveal"><span class="w3-hide-small">Hello, I'm</span> Emmanuel Nate.</h1>
+    <p class="scroll-reveal" style="--reveal-delay: 100ms">Software Developer and Web Designer.</p>
     
     <a class="scroll-cue" href="#about" aria-label="Scroll to about section">
       <span class="scroll-mouse"></span>
@@ -402,7 +433,7 @@
   </header>
 
   <!-- About Section -->
-  <div class="w3-content w3-justify w3-text-grey w3-padding-64" id="about">
+  <div class="w3-content w3-justify w3-text-grey w3-padding-64 scroll-reveal" id="about">
     <h2 class="w3-text-light-grey">About Me</h2>
     <hr style="width:145px" class="w3-opacity">
     <p>I am a software developer with a passion for creating innovative and efficient solutions. With experience in various programming languages and frameworks, I enjoy tackling complex problems and delivering high-quality software. My goal is to continuously learn and grow as a developer while contributing to meaningful projects that make a difference.
@@ -449,11 +480,11 @@
   
   <!-- Portfolio Section -->
   <div class="w3-padding-64 w3-content" id="projects">
-    <h2 class="w3-text-light-grey">Projects</h2>
-    <hr style="width:120px" class="w3-opacity">
+    <h2 class="w3-text-light-grey scroll-reveal">Projects</h2>
+    <hr style="width:120px" class="w3-opacity scroll-reveal">
 
     <!-- Grid for projects -->
-    <div class="w3-row-padding" style="margin:0 -16px">
+    <div class="w3-row-padding scroll-reveal" style="margin:0 -16px; --reveal-delay: 100ms">
       <p style="color: #ccc; text-align: center;">Can't show projects yet. Coming soon...</p>
       
       <div class="w3-half">
@@ -468,7 +499,7 @@
     </div>
 
     <!-- Change data-github-username to display another GitHub profile. -->
-    <section class="contribution-section" id="contributions" data-github-username="emmanetan" aria-labelledby="contributionHeading">
+    <section class="contribution-section scroll-reveal" id="contributions" data-github-username="emmanetan" aria-labelledby="contributionHeading">
       <div class="contribution-heading">
         <h3 id="contributionHeading"><i class="fa fa-github" aria-hidden="true"></i>GitHub Contributions</h3>
         <a id="contributionProfile" href="https://github.com/emmanetan" target="_blank" rel="noopener noreferrer">View on GitHub &nearr;</a>
@@ -500,7 +531,7 @@
   </div>
 
   <!-- Contact Section -->
-  <div class="w3-padding-64 w3-content w3-text-grey" id="contact">
+  <div class="w3-padding-64 w3-content w3-text-grey scroll-reveal" id="contact">
     <h2 class="w3-text-light-grey">Contact Me</h2>
     <hr style="width:175px" class="w3-opacity">
 
@@ -541,7 +572,7 @@
   </div>
   
 <!-- Footer. This section contains an ad for W3Schools Spaces. You can leave it to support us. -->
-<footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge">
+<footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge scroll-reveal">
   <a class="fa fa-facebook-official w3-hover-opacity" href="https://www.facebook.com/" target="_blank"></a>
   <a class="fa fa-github w3-hover-opacity" href="https://www.github.com/" target="_blank"></a>
   <a class="fa fa-linkedin w3-hover-opacity" href="https://www.linkedin.com/company/" target="_blank"></a>
@@ -560,6 +591,41 @@
   </svg>
 </button>
 
+<script>
+  // Content stays visible when JavaScript or IntersectionObserver is unavailable.
+  (() => {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (reducedMotion.matches || !('IntersectionObserver' in window)) return;
+
+    const revealElements = document.querySelectorAll('.scroll-reveal');
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.remove('reveal-pending');
+        revealObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0, rootMargin: '0px 0px -48px 0px' });
+
+    revealElements.forEach(element => {
+      element.classList.add('reveal-pending');
+      revealObserver.observe(element);
+    });
+
+    // Keyboard navigation should reveal a focused section immediately.
+    document.addEventListener('focusin', event => {
+      const section = event.target.closest('.scroll-reveal');
+      if (!section) return;
+      section.classList.remove('reveal-pending');
+      revealObserver.unobserve(section);
+    });
+
+    reducedMotion.addEventListener('change', event => {
+      if (!event.matches) return;
+      revealObserver.disconnect();
+      revealElements.forEach(element => element.classList.remove('reveal-pending'));
+    });
+  })();
+</script>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
   const contributionSection = document.getElementById('contributions');
@@ -779,7 +845,7 @@
   scrollToTop.addEventListener('click', function() {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth',
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
     });
   });
 </script>
