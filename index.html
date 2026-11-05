@@ -200,6 +200,27 @@
       height: 22px;
       fill: currentColor;
     }
+    .about-intro {
+      display: grid;
+      grid-template-columns: 180px minmax(0, 1fr);
+      align-items: center;
+      gap: 32px;
+      margin: 24px 0 16px;
+    }
+    .about-portrait {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1;
+      object-fit: contain;
+      border: 1px solid #292929;
+      border-radius: 0;
+    }
+    .about-intro p {
+      margin: 0;
+      line-height: 1.9;
+      text-align: left;
+    }
     .project-intro {
       margin: 20px 0 28px;
       color: #a3a3a3;
@@ -561,6 +582,14 @@
       }
     }
     @media only screen and (max-width: 600px) {
+      .about-intro {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 24px;
+      }
+      .about-portrait {
+        justify-self: center;
+        width: 160px;
+      }
       .project-grid,
       .project-card:last-child:nth-child(odd) {
         grid-template-columns: minmax(0, 1fr);
@@ -636,8 +665,10 @@
   <div class="w3-content w3-justify w3-text-grey w3-padding-64 scroll-reveal" id="about">
     <h2 class="w3-text-light-grey">About Me</h2>
     <hr style="width:145px" class="w3-opacity">
-    <p>I am a web and application developer with a passion for creating innovative and efficient solutions. With experience in various programming languages and frameworks, I enjoy tackling complex problems and delivering high-quality software. My goal is to continuously learn and grow as a developer while contributing to meaningful projects that make a difference.
-    </p>
+    <div class="about-intro">
+      <img class="about-portrait" src="images/2x2.png" alt="Portrait of Emmanuel Nate" width="600" height="600" decoding="async">
+      <p>I am a web and application developer with a passion for creating innovative and efficient solutions. With experience in various programming languages and frameworks, I enjoy tackling complex problems and delivering high-quality software. My goal is to continuously learn and grow as a developer while contributing to meaningful projects that make a difference.</p>
+    </div>
     <h3 class="w3-padding-16 w3-text-light-grey">My Skills</h3>
     <p class="w3-wide">C#</p>
     <div class="w3-white" style="border-radius: 20px;">
